@@ -5,6 +5,10 @@ on:
         description: The execution architecture (arm, amd64, etc.)
         required: true
         type: string
+      extra-flags:
+        description: A space-separated list of additional build flags for the go test command.
+        required: false
+        type: string
       extra-tags:
         description: A comma-separated list of additional build tags.
         required: false
@@ -149,6 +153,7 @@ jobs:
               -tags "${{ inputs.go-tags }} ${{ inputs.extra-tags }}" \
               -timeout=${{ env.TIMEOUT_IN_MINUTES }}m \
               -parallel=20 \
+              ${{ inputs.extra-flags }} \
                 \
               ${test_packages[${{ matrix.runner-index }}]}
       - name: Archive test results
