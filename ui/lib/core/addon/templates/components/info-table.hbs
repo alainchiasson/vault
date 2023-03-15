@@ -6,12 +6,12 @@
     <thead class="has-text-weight-semibold">
       <tr>
         <th scope="col">
-          {{@header}}
+          {{this.header}}
         </th>
       </tr>
     </thead>
     <tbody>
-      {{#each @items as |item|}}
+      {{#each this.items as |item|}}
         <tr>
           <td>
             <InfoTableRow @value={{item}} />

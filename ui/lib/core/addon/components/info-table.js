@@ -3,7 +3,8 @@
  * SPDX-License-Identifier: MPL-2.0
  */
 
-import Component from '@glimmer/component';
+import Component from '@ember/component';
+import layout from '../templates/components/info-table';
 
 /**
  * @module InfoTable
@@ -22,8 +23,10 @@ import Component from '@glimmer/component';
  * @param {Array} items=null - An array of strings which will be used as the InfoTableRow value.
  */
 
-export default class InfoTable extends Component {
-  get title() {
-    return this.args.title || 'Info Table';
-  }
-}
+export default Component.extend({
+  layout,
+  tagName: '',
+  title: 'Info Table',
+  header: null,
+  items: null,
+});
