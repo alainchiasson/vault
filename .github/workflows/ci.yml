@@ -88,6 +88,8 @@ jobs:
     # Don't run this job for branches starting with 'ui/', 'docs/', or 'backport/docs/'
     if: ${{ ! (startsWith( github.ref_name, 'ui/' ) || startsWith( github.ref_name, 'docs/' ) || startsWith( github.ref_name, 'backport/docs/') ) }}
     uses: ./.github/workflows/test-go.yml
+    env:
+      VAULT_CI_GO_TEST_RACE: 1
     with:
       go-arch: amd64
       go-tags: ${{ needs.setup.outputs.go-tags }}
@@ -96,5 +98,3 @@ jobs:
       runs-on: ${{ needs.setup.outputs.runs-on }}
       enterprise: ${{ needs.setup.outputs.enterprise }}
     secrets: inherit
-    env:
-      VAULT_CI_GO_TEST_RACE: 1
