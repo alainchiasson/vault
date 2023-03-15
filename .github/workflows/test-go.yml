@@ -26,6 +26,10 @@ on:
         description: The go tags to include on the go test command.
         required: false
         type: string
+      race-detection:
+        description: Should race detection be enabled?
+        type: boolean
+        default: false
 
 env:
   total-runners: 16
@@ -119,6 +123,11 @@ jobs:
           # matrix.runner-index value.
           #
           ENTERPRISE=${{ inputs.enterprise }} source .github/scripts/generate-test-package-lists.sh
+
+          # If data race detection is enabled, export a relevant environment variable for use in tests
+          if [ ${{ github.event.inputs.race-detection }} = true ]; then
+            export VAULT_CI_GO_TEST_RACE=1
+          fi
 
           # Build the dynamically generated source files.
           make prep
